@@ -1,8 +1,10 @@
+import Hero from "@/components/Hero";
+
 const Home = () => {
   return (
-    <div className="mt-20">
-      Home Page
-    </div>
+    <>
+      <Hero />
+    </>
   );
 };
 

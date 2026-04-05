@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Search, ShoppingCart } from "lucide-react";
 
 type NavLink = {
   name: string;
@@ -58,17 +59,15 @@ const Header = () => {
           <Image src={"/menu.svg"} alt="MenuIcon" width={25} height={25} />
         </button>
         {/* Search */}
-        <Image
-          src={"/search.svg"}
-          alt="SearchIcon"
-          width={21}
-          height={21}
-          className="cursor-pointer"
+        <Search
+          width={25}
+          height={25}
+          className="cursor-pointer hover:text-destructive"
         />
         {/* Cart */}
         <Link href="/cart" className="relative cursor-pointer">
-          <Image src={"/basket.svg"} alt="CartIcon" width={25} height={25} />
-          <button className="absolute -top-3 -right-2 text-xs text-white bg-destructive w-4.5 h-4.5 rounded-full">
+          <ShoppingCart width={25} height={25} className="hover:text-destructive" />
+          <button className="absolute -top-2 -right-2 text-xs text-white bg-destructive w-4.5 h-4.5 rounded-full">
             0
           </button>
         </Link>
