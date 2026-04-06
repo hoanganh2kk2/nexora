@@ -3,14 +3,16 @@ import Link from "next/link";
 const Hero = () => {
   return (
     <section>
-      <div className="max-padd-container bg-[url('/bg.png')] bg-cover bg-center bg-no-repeat h-screen w-full">
+      <div className="max-padd-container sm:bg-[url('/bg.png')] bg-cover bg-center bg-no-repeat h-screen w-full">
         <div className="flex items-center h-full">
           <div>
             <h4 className="uppercase medium-18 tracking-wide">
               TRENDY TREASURES
             </h4>
             <h1 className="capitalize max-w-190">
-              Elevate Your Look <span className="text-destructive">With Every Click.</span> Shop Today!
+              Elevate Your Look{" "}
+              <span className="text-destructive">With Every Click.</span> Shop
+              Today!
             </h1>
             <p className="my-5 max-w-132">
               Discover the latest trends and elevate your style with our curated

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Search, ShoppingCart } from "lucide-react";
+import { assets } from "@/public/data";
 
 type NavLink = {
   name: string;
@@ -24,11 +25,11 @@ const Header = () => {
 
   return (
     <nav
-      className={`${!isHomePage && "bg-white"} max-padd-container absolute top-0 left-0 right-0 w-full flex items-center justify-between py-4 transition-all`}
+      className={`${!isHomePage && "bg-white"} bg-white max-padd-container sticky top-0 left-0 right-0 w-full flex items-center justify-between py-4 transition-all border-b border-gray-200 z-50`}
     >
       {/* Logo */}
       <Link href={"/"} className="flex gap-1">
-        <Image src={"/logo.png"} alt="LogoIcon" width={35} height={35} />
+        <Image src={assets.logo} alt="LogoIcon" width={35} height={35} />
         <h3 className="text-2xl hidden sm:block">
           Nex<span className="text-destructive font-bold">ora</span>
         </h3>
@@ -56,7 +57,7 @@ const Header = () => {
           aria-label="Menu"
           className="sm:hidden"
         >
-          <Image src={"/menu.svg"} alt="MenuIcon" width={25} height={25} />
+          <Image src={assets.menu} alt="MenuIcon" width={25} height={25} />
         </button>
         {/* Search */}
         <Search
@@ -66,7 +67,11 @@ const Header = () => {
         />
         {/* Cart */}
         <Link href="/cart" className="relative cursor-pointer">
-          <ShoppingCart width={25} height={25} className="hover:text-destructive" />
+          <ShoppingCart
+            width={25}
+            height={25}
+            className="hover:text-destructive"
+          />
           <button className="absolute -top-2 -right-2 text-xs text-white bg-destructive w-4.5 h-4.5 rounded-full">
             0
           </button>
@@ -74,7 +79,7 @@ const Header = () => {
         {/* User/Auth */}
         <button className="btn-destructive flexCenter gap-1 px-4">
           <Image
-            src={"/user.svg"}
+            src={assets.user}
             alt="UserIcon"
             width={19}
             height={19}
@@ -86,7 +91,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`${open ? "translate-x-0 opacity-100" : "-translate-x-5 opacity-0 pointer-events-none"} transition-all duration-300 ease-in-out absolute top-15 left-0 w-full bg-white shadow-md py-0 flex-col items-start text-sm md:hidden`}
+        className={`${open ? "translate-y-0 opacity-100" : "-translate-y-5 opacity-0 pointer-events-none"} transition-all duration-300 ease-in-out absolute top-18 left-0 w-full bg-white shadow-md py-0 flex-col items-start text-sm md:hidden`}
       >
         <div className="flex flex-col w-full">
           {navLinks.map((link) => (
