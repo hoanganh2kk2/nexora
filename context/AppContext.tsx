@@ -2,15 +2,10 @@
 import { dummyProducts } from "@/public/data";
 import { productType } from "@/types";
 import { useRouter } from "next/navigation";
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 interface AppContextType {
+  push(arg0: string): void;
   products: productType[];
   isSeller: boolean;
   setIsSeller: (value: boolean) => void;
@@ -35,7 +30,6 @@ const AppContextProvider = (props: IProps) => {
   const children = props.children;
   const [products, setProducts] = useState<productType[]>(dummyProducts);
   const [isSeller, setIsSeller] = useState<boolean>(false);
-  const router = useRouter();
   const currency = process.env.NEXT_PUBLIC_CURRENCY || "$";
 
   const value = {

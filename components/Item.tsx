@@ -13,12 +13,12 @@ interface IProps {
 
 const Item = (props: IProps) => {
   const product = props.product;
-  const [count, setCount] = useState<number>(0);
   const router = useRouter();
+  const [count, setCount] = useState<number>(0);
 
   return (
     <div
-      onClick={() => router.push("/")}
+      onClick={() => router.push("/product/" + product._id)}
       className="rounded-2xl pb-2 overflow-hidden"
     >
       <div className="group cursor-pointer flex items-center justify-center overflow-hidden">

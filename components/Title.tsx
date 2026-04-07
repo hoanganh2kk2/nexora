@@ -13,7 +13,7 @@ const Title = (props: IProps) => {
     <div>
       <div className={`${titleStyles}`}>
         <h3 className={`${title1Styles} h3`}>
-          {title1}
+          {title1}{" "}
           <span className="text-destructive font-light! underline">
             {title2}
           </span>
