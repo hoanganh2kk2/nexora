@@ -1,6 +1,7 @@
 import Banner from "@/components/Banner";
 import Hero from "@/components/Hero";
 import NewArrivals from "@/components/NewArrivals";
+import PopularProducts from "@/components/PopularProducts";
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <Hero />
       <NewArrivals />
       <Banner />
+      <PopularProducts />
     </>
   );
 };
