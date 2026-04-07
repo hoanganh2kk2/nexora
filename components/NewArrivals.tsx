@@ -2,9 +2,11 @@
 import { useState } from "react";
 import Item from "./Item";
 import Title from "./Title";
-import { dummyProducts } from "@/public/data";
+import { useAppContext } from "@/context/AppContext";
+import { productType } from "@/types";
 
 const NewArrivals = () => {
+  const { products } = useAppContext();
   const [isPaused, setIsPaused] = useState<boolean>(false);
 
   return (
@@ -42,20 +44,27 @@ const NewArrivals = () => {
             }}
           >
             <div className="flex">
-              {dummyProducts.slice(0, 8).map((product, index) => (
-                <div key={index} className="w-56 mx-5 h-103 relative">
-                  <Item product={product} />
-                </div>
-              ))}
+              {products
+                .slice(0, 8)
+                .map((product: productType, index: number) => (
+                  <div key={index} className="w-56 mx-5 h-103 relative">
+                    <Item product={product} />
+                  </div>
+                ))}
             </div>
 
             {/* duplicate */}
             <div className="flex">
-              {dummyProducts.slice(0, 8).map((product, index) => (
-                <div key={`dup-${index}`} className="w-56 mx-5 h-103 relative">
-                  <Item product={product} />
-                </div>
-              ))}
+              {products
+                .slice(0, 8)
+                .map((product: productType, index: number) => (
+                  <div
+                    key={`dup-${index}`}
+                    className="w-56 mx-5 h-103 relative"
+                  >
+                    <Item product={product} />
+                  </div>
+                ))}
             </div>
           </div>
           {/* RIGHT */}

@@ -1,6 +1,7 @@
 "use client";
 
 import { assets } from "@/public/data";
+import { productType } from "@/types";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -9,20 +10,6 @@ import { useState } from "react";
 interface IProps {
   product: productType;
 }
-
-type productType = {
-  _id: string;
-  category: string;
-  date: string;
-  description: string;
-  images: string[];
-  name: string;
-  offerPrice: number;
-  popular: boolean;
-  price: number;
-  subCategory: string;
-  userId: string;
-};
 
 const Item = (props: IProps) => {
   const product = props.product;
