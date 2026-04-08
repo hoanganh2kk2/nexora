@@ -31,7 +31,7 @@ const Product = () => {
   return (
     product && (
       <>
-        <div className="max-padd-container py-28">
+        <div className="max-padd-container py-5">
           <p>
             <span>Home</span> /<span> Products</span> /
             <span> {product.category}</span> /
