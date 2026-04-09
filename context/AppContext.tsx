@@ -15,7 +15,6 @@ interface AppContextType {
   updateCartQuantity: (itemId: string, quantity: number) => void;
   getCartAmount: () => number;
   user: boolean;
-  removeFromCart: (itemId: string) => void;
 }
 
 interface IProps {
@@ -81,17 +80,6 @@ const AppContextProvider = (props: IProps) => {
     return Math.floor(totalAmount * 100) / 100;
   };
 
-  const removeFromCart = (itemId: string) => {
-    const cartData: Record<string, number> = structuredClone(cartItems);
-    if (cartData[itemId]) {
-      cartData[itemId] -= 1;
-      if (cartData[itemId] <= 0) {
-        delete cartData[itemId];
-      }
-      setCartItems(cartData);
-    }
-  };
-
   const value = {
     products,
     isSeller,
@@ -104,7 +92,6 @@ const AppContextProvider = (props: IProps) => {
     updateCartQuantity,
     getCartAmount,
     user,
-    removeFromCart
   };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

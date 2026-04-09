@@ -6,18 +6,29 @@ import { productType } from "@/types";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IProps {
   product: productType;
 }
 
 const Item = (props: IProps) => {
-  const { addToCart, removeFromCart, cartItems } = useAppContext();
+  const { cartItems, updateCartQuantity } = useAppContext();
   const product = props.product;
   const router = useRouter();
-  // const [count, setCount] = useState<number>(0);
-  const count: number = cartItems[product._id] || 0;
+  const [count, setCount] = useState<number>(0);
+
+  useEffect(() => {
+    const existing = cartItems[product._id];
+    if (existing) {
+      setCount(existing);
+    }
+  }, [cartItems, product._id]);
+
+  const handleUpdate = (newCount: number) => {
+    setCount(newCount);
+    updateCartQuantity(product._id, newCount);
+  };
 
   return (
     <div
@@ -51,14 +62,12 @@ const Item = (props: IProps) => {
               ${product.price}.00
             </span>
           </p>
-          <div className="text-white">
+          <div onClick={(e) => e.stopPropagation()} className="text-white">
             {count === 0 ? (
               <button
                 className="flex items-center justify-center gap-1 bg-destructive md:w-20 w-16 h-8.5 rounded font-medium cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  // setCount(1);
-                  addToCart(product._id);
+                onClick={() => {
+                  handleUpdate(1);
                 }}
               >
                 <ShoppingCart
@@ -71,10 +80,8 @@ const Item = (props: IProps) => {
             ) : (
               <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-8.5 bg-destructive/50 rounded select-none">
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    // setCount((prev) => Math.max(prev - 1, 0));
-                    removeFromCart(product._id);
+                  onClick={() => {
+                    handleUpdate(Math.max(count - 1, 0));
                   }}
                   className="cursor-pointer text-md px-2 h-full"
                 >
@@ -82,10 +89,9 @@ const Item = (props: IProps) => {
                 </button>
                 <span className="w-5 text-center">{count}</span>
                 <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    // setCount((prev) => prev + 1);
-                    addToCart(product._id);
+                  onClick={() => {
+                    handleUpdate(count + 1);
+                    // addToCart(product._id);
                   }}
                   className="cursor-pointer text-md px-2 h-full"
                 >
