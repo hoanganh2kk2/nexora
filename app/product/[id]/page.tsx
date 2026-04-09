@@ -10,7 +10,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Product = () => {
-  const { products } = useAppContext();
+  const { products, addToCart } = useAppContext();
   const router = useRouter();
   const [product, setProduct] = useState<productType | null>(null);
   const [thumbnail, setThumbnail] = useState<string>("");
@@ -132,10 +132,19 @@ const Product = () => {
               <p>{product.description}</p>
 
               <div className="flex items-center mt-10 gap-4 text-base">
-                <button className="w-full py-3.5 cursor-pointer font-medium bg-gray-100 text-gray-800/80 hover:bg-gray-200 transition rounded-2xl">
+                <button
+                  onClick={() => addToCart(product._id)}
+                  className="w-full py-3.5 cursor-pointer font-medium bg-gray-100 text-gray-800/80 hover:bg-gray-200 transition rounded-2xl"
+                >
                   Add to Cart
                 </button>
-                <button className="w-full py-3.5 cursor-pointer font-medium bg-destructive text-white hover:bg-destructive/90 transition rounded-2xl">
+                <button
+                  onClick={() => {
+                    addToCart(product._id);
+                    router.push("/cart");
+                  }}
+                  className="w-full py-3.5 cursor-pointer font-medium bg-destructive text-white hover:bg-destructive/90 transition rounded-2xl"
+                >
                   Buy now
                 </button>
               </div>

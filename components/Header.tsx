@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Search, ShoppingCart } from "lucide-react";
 import { assets } from "@/public/data";
+import { useAppContext } from "@/context/AppContext";
 
 type NavLink = {
   name: string;
@@ -12,6 +13,7 @@ type NavLink = {
 };
 
 const Header = () => {
+  const { getCartCount } = useAppContext();
   const [open, setOpen] = useState<boolean>(false);
   const navLinks: NavLink[] = [
     { name: "Home", href: "/" },
@@ -73,7 +75,7 @@ const Header = () => {
             className="hover:text-destructive"
           />
           <button className="absolute -top-2 -right-2 text-xs text-white bg-destructive w-4.5 h-4.5 rounded-full">
-            0
+            {getCartCount()}
           </button>
         </Link>
         {/* User/Auth */}

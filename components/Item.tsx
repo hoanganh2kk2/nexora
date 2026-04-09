@@ -1,5 +1,6 @@
 "use client";
 
+import { useAppContext } from "@/context/AppContext";
 import { assets } from "@/public/data";
 import { productType } from "@/types";
 import { ShoppingCart } from "lucide-react";
@@ -12,14 +13,16 @@ interface IProps {
 }
 
 const Item = (props: IProps) => {
+  const { addToCart, removeFromCart, cartItems } = useAppContext();
   const product = props.product;
   const router = useRouter();
-  const [count, setCount] = useState<number>(0);
+  // const [count, setCount] = useState<number>(0);
+  const count: number = cartItems[product._id] || 0;
 
   return (
     <div
       onClick={() => router.push("/product/" + product._id)}
-      className="rounded-2xl pb-2 overflow-hidden"
+      className="rounded-2xl pb-2 overflow-hidden cursor-pointer"
     >
       <div className="group cursor-pointer flex items-center justify-center overflow-hidden">
         <Image
@@ -51,8 +54,12 @@ const Item = (props: IProps) => {
           <div className="text-white">
             {count === 0 ? (
               <button
-                className="flex items-center justify-center gap-1 bg-destructive md:w-20 w-16 h-8.5 rounded font-medium"
-                onClick={() => setCount(1)}
+                className="flex items-center justify-center gap-1 bg-destructive md:w-20 w-16 h-8.5 rounded font-medium cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // setCount(1);
+                  addToCart(product._id);
+                }}
               >
                 <ShoppingCart
                   height={22}
@@ -64,14 +71,22 @@ const Item = (props: IProps) => {
             ) : (
               <div className="flex items-center justify-center gap-2 md:w-20 w-16 h-8.5 bg-destructive/50 rounded select-none">
                 <button
-                  onClick={() => setCount((prev) => Math.max(prev - 1, 0))}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // setCount((prev) => Math.max(prev - 1, 0));
+                    removeFromCart(product._id);
+                  }}
                   className="cursor-pointer text-md px-2 h-full"
                 >
                   -
                 </button>
                 <span className="w-5 text-center">{count}</span>
                 <button
-                  onClick={() => setCount((prev) => prev + 1)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    // setCount((prev) => prev + 1);
+                    addToCart(product._id);
+                  }}
                   className="cursor-pointer text-md px-2 h-full"
                 >
                   +
