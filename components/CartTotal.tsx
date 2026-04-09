@@ -123,7 +123,7 @@ const CartTotal = () => {
         </p>
       </div>
 
-      <button className="w-full py-3 mt-6 cursor-pointer bg-destructive text-white font-medium hover:bg-destructive/90 transition rounded">
+      <button className="w-full py-3 mt-3 cursor-pointer bg-destructive text-white font-medium hover:bg-destructive/90 transition rounded">
         Place Order
       </button>
     </div>
